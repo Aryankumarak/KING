@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TANMAY 2.0 | Dashboard</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #6c5ce7;
+            --primary-dark: #5649c0;
+            --secondary: #00cec9;
+            --danger: #ff7675;
+            --danger-dark: #e84393;
+            --success: #00b894;
+            --success-dark: #00a884;
+            --warning: #fdcb6e;
+            --warning-dark: #e17055;
+            --dark: #2d3436;
+            --light: #f5f6fa;
+            --card-bg: rgba(255, 255, 255, 0.1);
+            --card-border: rgba(255, 255, 255, 0.2);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #1e1e2f, #2d2d44);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            color: var(--light);
+            padding: 20px;
+        }
+        
+        .dashboard {
+            width: 100%;
+            max-width: 450px;
+            background: var(--card-bg);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(15px);
+            border: 1px solid var(--card-border);
+            animation: fadeIn 0.5s ease;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 25px;
+            position: relative;
+        }
+        
+        .header h1 {
+            font-size: 1.8rem;
+            font-weight: 600;
+            margin-bottom: 5px;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .header p {
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+        
+        .key-display {
+            background: rgba(0, 0, 0, 0.2);
+            padding: 12px;
+            border-radius: 10px;
+            font-family: monospace;
+            letter-spacing: 1px;
+            margin: 15px 0;
+            text-align: center;
+            border-left: 4px solid var(--primary);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .info-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 15px;
+            margin: 25px 0;
+        }
+        
+        .info-card {
+            background: rgba(0, 0, 0, 0.15);
+            border-radius: 12px;
+            padding: 15px;
+            display: flex;
+            align-items: center;
+            transition: transform 0.3s;
+            border-left: 3px solid var(--primary);
+        }
+        
+        .info-card:hover {
+            transform: translateY(-3px);
+        }
+        
+        .info-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+            font-size: 1.1rem;
+            color: white;
+        }
+        
+        .info-content {
+            flex: 1;
+        }
+
+.info-label {
+            font-size: 0.8rem;
+            opacity: 0.7;
+            margin-bottom: 3px;
+        }
+        
+        .info-value {
+            font-size: 1rem;
+            font-weight: 500;
+        }
+        
+        .countdown {
+            background: rgba(0, 0, 0, 0.2);
+            padding: 15px;
+            border-radius: 10px;
+            text-align: center;
+            margin: 20px 0;
+            border: 1px solid var(--card-border);
+        }
+        
+        .countdown-label {
+            font-size: 0.9rem;
+            margin-bottom: 8px;
+            opacity: 0.8;
+        }
+        
+        #countdown {
+            font-size: 1.4rem;
+            font-weight: 600;
+            font-family: monospace;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .game-buttons {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin-bottom: 12px;
+        }
+        
+        .btn {
+            padding: 14px;
+            border-radius: 10px;
+            font-weight: 500;
+            text-align: center;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+        
+        .btn i {
+            margin-right: 10px;
+        }
+        
+        .btn-warning {
+            background: var(--warning);
+            color: var(--dark);
+        }
+        
+        .btn-warning:hover {
+            background: var(--warning-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(253, 203, 110, 0.4);
+        }
+        
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(108, 92, 231, 0.4);
+        }
+        
+        .btn-danger {
+            background: var(--danger);
+            color: white;
+        }
+        
+        .btn-danger:hover {
+            background: var(--danger-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(255, 118, 117, 0.4);
+        }
+        
+        .footer {
+            text-align: center;
+            margin-top: 25px;
+            font-size: 0.8rem;
+            opacity: 0.7;
+        }
+        
+        @media (max-width: 480px) {
+            .dashboard {
+                padding: 20px;
+            }
+            
+            .game-buttons {
+                grid-template-columns: 1fr;
+            }
+            
+            .header h1 {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="dashboard">
+        <div class="header">
+            <h1>TANMAY 2.0 DASHBOARD</h1>
+            <p>Choose your Wingo mode</p>
+        </div>
+        
+        <div class="key-display">
+            LORD        </div>
+        
+        <div class="info-grid">
+            <div class="info-card">
+                <div class="info-icon">
+                    <i class="fas fa-key"></i>
+                </div>
+                <div class="info-content">
+                    <div class="info-label">LICENSE KEY</div>
+                    <div class="info-value">LORD</div>
+                </div>
+            </div>
+            
+            <div class="info-card">
+                <div class="info-icon">
+                    <i class="fas fa-desktop"></i>
+                </div>
+                <div class="info-content">
+
+<div class="info-label">DEVICE ID</div>
+                    <div class="info-value">157.45.238.231</div>
+                </div>
+            </div>
+            
+            <div class="info-card">
+                <div class="info-icon">
+                    <i class="fas fa-clock"></i>
+                </div>
+                <div class="info-content">
+                    <div class="info-label">EXPIRATION DATE</div>
+                    <div class="info-value">2025-04-06</div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="countdown">
+            <div class="countdown-label">TIME REMAINING</div>
+            <div id="countdown">
+                2025-04-06 00:00:00            </div>
+        </div>
+        
+        <div class="game-buttons">
+            <a href="kaa.php" class="btn btn-warning">
+                <i class="fas fa-stopwatch"></i> 1-MIN WINGO
+            </a>       
+        </div>
+        
+        <div class="btn-group">
+            <a href="index.php" class="btn btn-danger">
+                <i class="fas fa-sign-out-alt"></i> LOGOUT
+            </a>
+        </div>
+        
+        <div class="footer">
+            TANMAY 2.0 &copy; 2025 | All Rights Reserved
+        </div>
+    </div>
+
+    <script>
+        function startCountdown(duration) {
+            let countdownElement = document.getElementById("countdown");
+            let timeRemaining = duration;
+
+            function updateCountdown() {
+                if (timeRemaining <= 0) {
+                    countdownElement.innerHTML = "LICENSE EXPIRED";
+                    countdownElement.style.backgroundImage = "linear-gradient(to right, #ff7675, #e84393)";
+                    clearInterval(timer);
+                    return;
+                }
+
+                let days = Math.floor(timeRemaining / (60 * 60 * 24));
+                let hours = Math.floor((timeRemaining % (60 * 60 * 24)) / (60 * 60));
+                let minutes = Math.floor((timeRemaining % (60 * 60)) / 60);
+                let seconds = timeRemaining % 60;
+
+                hours = hours < 10 ? "0" + hours : hours;
+                minutes = minutes < 10 ? "0" + minutes : minutes;
+                seconds = seconds < 10 ? "0" + seconds : seconds;
+
+                countdownElement.innerHTML = ${days}d ${hours}h ${minutes}m ${seconds}s;
+                timeRemaining--;
+                
+                if (days < 1) {
+                    countdownElement.style.backgroundImage = "linear-gradient(to right, #ff7675, #e84393)";
+                }
+            }
+
+            updateCountdown();
+            let timer = setInterval(updateCountdown, 1000);
+        }
+
+                    startCountdown(68535);
+            </script>
+</body>
+</html>
